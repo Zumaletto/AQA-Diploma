@@ -18,3 +18,13 @@ services:
       - MYSQL_DATABASE=app
       - MYSQL_USER=app
       - MYSQL_PASSWORD=pass
+
+  node:
+    image: node:17-alpine
+    user: "node"
+    ports:
+      - '9999:9999'
+    working_dir: /home/node/app
+    volumes:
+      - ./gate-simulator/:/home/node/app
+     command: "npm start"
