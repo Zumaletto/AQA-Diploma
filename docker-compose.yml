@@ -6,8 +6,8 @@ services:
       - '5432:5432'
     environment:
       - POSTGRES_DB=app
-      - POSTGRES_USER=user
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=pass
 
   mysql:
     image: mysql:8.0.18
@@ -19,12 +19,7 @@ services:
       - MYSQL_USER=app
       - MYSQL_PASSWORD=pass
 
-  node:
-    image: node:17-alpine
-    user: "node"
+  node-app:
+    build: ./gate-simulator
     ports:
       - '9999:9999'
-    working_dir: /home/node/app
-    volumes:
-      - ./gate-simulator/:/home/node/app
-     command: "npm start"
