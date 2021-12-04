@@ -25,4 +25,6 @@ public class MainPage{
         return new BuyOnCredit();
     }
 
+
+
 }

@@ -29,9 +29,9 @@ public class DataHelper {
         return "4444 4444 4444 4442";
     }
 
-    public static String getCardNumber() {
+    public static String getInvalidCardNumber() {
         Faker faker = new Faker();
-        return Long.toString(faker.number().randomNumber(16, true));
+        return Long.toString(faker.number().randomNumber(7, true));
     }
 
     public static String getValidMonth() {
@@ -42,8 +42,15 @@ public class DataHelper {
         return month[rnd];
     }
 
-    public static String getInvalidMonth() {
+    public static String getInvalidMonth1() {
         String[] month = {"1", "2", "3",
+                "7", "8", "6"};
+        int rnd = new Random().nextInt(month.length);
+        return month[rnd];
+    }
+
+    public static String getInvalidMonth2() {
+        String[] month = {"22", "32", "14",
                 "13", "20", "15"};
         int rnd = new Random().nextInt(month.length);
         return month[rnd];
@@ -55,6 +62,10 @@ public class DataHelper {
 
     public static String getInvalidLastYear() {
         return LocalDate.now().minusYears(1).format(DateTimeFormatter.ofPattern("yy"));
+    }
+
+    public static String getInvalidFutureYear() {
+        return LocalDate.now().plusYears(10).format(DateTimeFormatter.ofPattern("yy"));
     }
 
     public static String getInvalidYear() {
