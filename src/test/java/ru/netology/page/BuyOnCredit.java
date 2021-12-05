@@ -2,7 +2,6 @@ package ru.netology.page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
-import ru.netology.data.DataHelper;
 
 import java.time.Duration;
 
@@ -10,7 +9,6 @@ import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
 import static ru.netology.data.DataHelper.*;
-import static ru.netology.data.DataHelper.getInvalidCvc;
 
 public class BuyOnCredit {
 
@@ -42,7 +40,7 @@ public class BuyOnCredit {
         return new BuyByCard();
     }
 
-    public void validPaymentGate(DataHelper.CardInfo cardInfo) {
+    public void validPaymentGate(CardInfo cardInfo) {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
