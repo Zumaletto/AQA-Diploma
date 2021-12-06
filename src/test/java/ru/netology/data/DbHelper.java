@@ -21,7 +21,7 @@ public class DbHelper {
     }
 
     @SneakyThrows
-    public static void clearData() {
+    public static void cleanData() {
         var runner = new QueryRunner();
         var cleanCreditRequest = "DELETE FROM credit_request_entity;";
         var cleanPayment = "DELETE FROM payment_entity;";

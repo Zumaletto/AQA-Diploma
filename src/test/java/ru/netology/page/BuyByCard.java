@@ -39,7 +39,7 @@ public class BuyByCard {
         return new BuyByCard();
     }
 
-    public void validPaymentGate(CardInfo cardInfo) {
+    public void validPaymentGate() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
