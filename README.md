@@ -21,4 +21,22 @@ ___
     - с использованием СУБД MySQL командой ```java "-Dspring.datasource.url=jdbc:mysql://185.119.57.164:3306/app" -jar artifacts/aqa-shop.jar```
     - с использованием СУБД PostgreSQL командой ```java "-Dspring.datasource.url=jdbc:postgresql://185.119.57.164:5432/app" -jar artifacts/aqa-shop.jar```
 
+Запустить автотесты командой:
 
+```
+./gradlew test -Dselenide.headless=true --info
+```
+Запустить отчеты командой:
+
+```
+./gradlew allureReport (первоначальная команда)
+```
+```
+./gradlew allureServe (запуск и открытие отчетов)
+```
+Остановить SUT комбдинацией клавиш ```CTRL+C```
+
+Остановить контейнеры командой ```CTRL + C``` и после удалить контейнеры командой
+```
+docker-compose down
+```
