@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DbHelper {
-    private static String url = System.getProperty("urlDb");
+    private static String url = "jdbc:mysql://185.119.57.164:3306/app"; //jdbc:postgresql://185.119.57.164:5432/app
     private static String user = "app";
     private static String password = "pass";
 
@@ -27,7 +27,7 @@ public class DbHelper {
         var cleanPayment = "DELETE FROM payment_entity;";
         var cleanOrder = "DELETE FROM order_entity;";
 
-        try (var conn = DriverManager.getConnection(url, user, password);) {
+        try (var conn = DriverManager.getConnection(url, user, password)) {
             runner.update(conn, cleanCreditRequest);
             runner.update(conn, cleanPayment);
             runner.update(conn, cleanOrder);
@@ -37,8 +37,8 @@ public class DbHelper {
     @SneakyThrows
     public static PaymentEntity payData() {
         var runner = new QueryRunner();
-        var reqStatus = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1";
-        try (var conn = DriverManager.getConnection(url, user, password);) {
+        var reqStatus = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1;";
+        try (var conn = DriverManager.getConnection(url, user, password)) {
             var payData = runner.query(conn, reqStatus, new BeanHandler<>(PaymentEntity.class));
             return payData;
         }
@@ -47,7 +47,7 @@ public class DbHelper {
     @SneakyThrows
     public static CreditRequestEntity creditData() {
         var runner = new QueryRunner();
-        var selectStatus = "SELECT * FROM credit_request_entity ORDER BY created DESC LIMIT 1";
+        var selectStatus = "SELECT * FROM credit_request_entity ORDER BY created DESC LIMIT 1;";
         try (var conn = DriverManager.getConnection(url, user, password)) {
             var creditData = runner.query(conn, selectStatus, new BeanHandler<>(CreditRequestEntity.class));
             return creditData;
@@ -57,7 +57,7 @@ public class DbHelper {
     @SneakyThrows
     public static OrderEntity orderData() {
         var runner = new QueryRunner();
-        var selectStatus = "SELECT * FROM order_entity ORDER BY created DESC LIMIT 1";
+        var selectStatus = "SELECT * FROM order_entity ORDER BY created DESC LIMIT 1;";
         try (var conn = DriverManager.getConnection(url, user, password)) {
             var orderData = runner.query(conn, selectStatus, new BeanHandler<>(OrderEntity.class));
             return orderData;
@@ -67,7 +67,7 @@ public class DbHelper {
     @SneakyThrows
     public static void checkEmptyOrderEntity() {
         var runner = new QueryRunner();
-        var orderRequest = "SELECT * FROM order_entity";
+        var orderRequest = "SELECT * FROM order_entity;";
         try (var conn = DriverManager.getConnection(url, user, password)) {
             var orderBlock = runner.query(conn, orderRequest, new BeanHandler<>(OrderEntity.class));
             assertNull(orderBlock);
@@ -87,7 +87,7 @@ public class DbHelper {
     @SneakyThrows
     public static void checkEmptyCreditEntity() {
         var runner = new QueryRunner();
-        var orderRequest = "SELECT * FROM credit_request_entity";
+        var orderRequest = "SELECT * FROM credit_request_entity;";
         try (var conn = DriverManager.getConnection(url, user, password)) {
             var creditBlock = runner.query(conn, orderRequest, new BeanHandler<>(CreditRequestEntity.class));
             assertNull(creditBlock);

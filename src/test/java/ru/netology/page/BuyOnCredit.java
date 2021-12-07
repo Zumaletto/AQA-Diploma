@@ -30,17 +30,12 @@ public class BuyOnCredit {
         heading.shouldBe(visible);
     }
 
-    public BuyOnCredit transitionToCredit() {
-        buttonBuyByCredit.click();
-        return new BuyOnCredit();
-    }
-
     public BuyByCard transitionToCard() {
         buttonBuyCard.click();
         return new BuyByCard();
     }
 
-    public void validPaymentGate(CardInfo cardInfo) {
+    public void validPaymentGate() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -49,7 +44,15 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidPaymentGate(CardInfo cardInfo) {
+    public void emptyNumberCard() {
+        monthCard.setValue(getValidMonth());
+        yearCard.setValue(getValidYear());
+        ownerCard.setValue(getValidOwner());
+        cvcCard.setValue(getValidCvc());
+        buttonCard.click();
+    }
+
+    public void invalidPaymentGate() {
         cardNumberCard.setValue(getDeclinedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -58,7 +61,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidNumberCard(CardInfo cardInfo) {
+    public void invalidNumberCard() {
         cardNumberCard.setValue(getInvalidCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -67,7 +70,15 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidMonth1(CardInfo cardInfo) {
+    public void emptyMonth() {
+        cardNumberCard.setValue(getApprovedCardNumber());
+        yearCard.setValue(getValidYear());
+        ownerCard.setValue(getValidOwner());
+        cvcCard.setValue(getValidCvc());
+        buttonCard.click();
+    }
+
+    public void invalidMonth1() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getInvalidMonth1());
         yearCard.setValue(getValidYear());
@@ -76,7 +87,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidMonth2(CardInfo cardInfo) {
+    public void invalidMonth2() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getInvalidMonth2());
         yearCard.setValue(getValidYear());
@@ -85,7 +96,15 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidYear(CardInfo cardInfo) {
+    public void emptyYear() {
+        cardNumberCard.setValue(getApprovedCardNumber());
+        monthCard.setValue(getValidMonth());
+        ownerCard.setValue(getValidOwner());
+        cvcCard.setValue(getValidCvc());
+        buttonCard.click();
+    }
+
+    public void invalidYear() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getInvalidYear());
@@ -94,7 +113,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidLastYear(CardInfo cardInfo) {
+    public void invalidLastYear() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getInvalidLastYear());
@@ -103,7 +122,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidFutureYear(CardInfo cardInfo) {
+    public void invalidFutureYear() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getInvalidFutureYear());
@@ -112,7 +131,15 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidOwnerCyrillic(CardInfo cardInfo) {
+    public void emptyOwner() {
+        cardNumberCard.setValue(getApprovedCardNumber());
+        monthCard.setValue(getValidMonth());
+        yearCard.setValue(getValidYear());
+        cvcCard.setValue(getValidCvc());
+        buttonCard.click();
+    }
+
+    public void invalidOwnerCyrillic() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -121,7 +148,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidOwnerMathSymbols(CardInfo cardInfo) {
+    public void invalidOwnerMathSymbols() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -130,7 +157,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidOwnerOwnerRegister(CardInfo cardInfo) {
+    public void invalidOwnerOwnerRegister() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -139,7 +166,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidOwnerOverLength(CardInfo cardInfo) {
+    public void invalidOwnerOverLength() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -148,7 +175,7 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidOwnerUnderLength(CardInfo cardInfo) {
+    public void invalidOwnerUnderLength() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
@@ -157,7 +184,15 @@ public class BuyOnCredit {
         buttonCard.click();
     }
 
-    public void invalidCVC(CardInfo cardInfo) {
+    public void emptyCVC() {
+        cardNumberCard.setValue(getApprovedCardNumber());
+        monthCard.setValue(getValidMonth());
+        yearCard.setValue(getValidYear());
+        ownerCard.setValue(getValidOwner());
+        buttonCard.click();
+    }
+
+    public void invalidCVC() {
         cardNumberCard.setValue(getApprovedCardNumber());
         monthCard.setValue(getValidMonth());
         yearCard.setValue(getValidYear());
