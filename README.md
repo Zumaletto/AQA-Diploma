@@ -18,25 +18,18 @@ ___
 * скачать нужный образ командой ```docker image pull <имя образа>```
 * запустить docker container ```docker-compose up -d```. Дождаться пока контейнеры запустятся
 * в терминале IntelliJ IDEA запустить SUT:
-    - с использованием СУБД MySQL командой ```java "-Dspring.datasource.url=jdbc:mysql://185.119.57.164:3306/app" -jar artifacts/aqa-shop.jar```
-    - с использованием СУБД PostgreSQL командой ```java "-Dspring.datasource.url=jdbc:postgresql://185.119.57.164:5432/app" -jar artifacts/aqa-shop.jar```
+    - с использованием БД MySQL командой ```java "-Dspring.datasource.url=jdbc:mysql://185.119.57.164:3306/app" -jar artifacts/aqa-shop.jar```
+    - с использованием БД PostgreSQL командой ```java "-Dspring.datasource.url=jdbc:postgresql://185.119.57.164:5432/app" -jar artifacts/aqa-shop.jar```
+* запустить автотесты командой:
+  - для конфигурации БД MySql:  
+    ```gradlew clean test -Ddb.url=jdbc:mysql://185.119.57.164:3306/app ```
+  - для конфигурации БД PostgreSQL:  
+    ```gradlew clean test -Ddb.url=jdbc:postgresql://185.119.57.164:5432/app ```
+* запустить отчеты командой:
+```./gradlew allureReport (первоначальная команда)```
 
-Запустить автотесты командой:
+```./gradlew allureServe (запуск и открытие отчетов)```
+* остановить SUT комбдинацией клавиш ```CTRL+C```
 
-```
-./gradlew test -Dselenide.headless=true --info
-```
-Запустить отчеты командой:
-
-```
-./gradlew allureReport (первоначальная команда)
-```
-```
-./gradlew allureServe (запуск и открытие отчетов)
-```
-Остановить SUT комбдинацией клавиш ```CTRL+C```
-
-Остановить контейнеры командой ```CTRL + C``` и после удалить контейнеры командой
-```
-docker-compose down
-```
+* Остановить контейнеры командой ```docker-compose stop``` и после удалить контейнеры командой
+```docker-compose down```
