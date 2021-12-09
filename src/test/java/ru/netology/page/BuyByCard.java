@@ -8,15 +8,14 @@ import java.time.Duration;
 import static com.codeborne.selenide.Condition.*;
 import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.$$;
-import static ru.netology.data.DataHelper.*;
 
 public class BuyByCard {
     private SelenideElement heading = $$(".heading").findBy(text("Оплата по карте"));
-    private SelenideElement cardNumberCard = $$(".input__control").get(0);
-    private SelenideElement monthCard = $$(".input__control").get(1);
-    private SelenideElement yearCard = $$(".input__control").get(2);
-    private SelenideElement ownerCard = $$(".input__control").get(3);
-    private SelenideElement cvcCard = $$(".input__control").get(4);
+    private SelenideElement cardNumberCard = $(".input__control[placeholder='0000 0000 0000 0000']");
+    private SelenideElement monthCard = $(".input__control[placeholder='08']");
+    private SelenideElement yearCard = $(".input__control[placeholder='22']");
+    private SelenideElement ownerCard = $("div:nth-child(3) > span > span:nth-child(1) > span > span > span.input__box > input");
+    private SelenideElement cvcCard = $(".input [placeholder='999']");
 
     private SelenideElement buttonBuyCard = $$("button").findBy(text("Купить"));
     private SelenideElement buttonBuyByCredit = $$("button").findBy(text("Купить в кредит"));
@@ -31,172 +30,56 @@ public class BuyByCard {
 
     public BuyOnCredit transitionToCredit() {
         buttonBuyByCredit.click();
+        $$(".heading").findBy(text("Кредит по данным карты")).shouldBe(visible);
         return new BuyOnCredit();
     }
 
-    public void validPaymentGate() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
+    public void enterCardData(String cardNumber, String month, String year, String owner, String cvc) {
+        cardNumberCard.setValue(cardNumber);
+        monthCard.setValue(month);
+        yearCard.setValue(year);
+        ownerCard.setValue(owner);
+        cvcCard.setValue(cvc);
         buttonCard.click();
     }
 
-    public void emptyNumberCard() {
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
+    public void enterWithOutNumber(String month, String year, String owner, String cvc) {
+        monthCard.setValue(month);
+        yearCard.setValue(year);
+        ownerCard.setValue(owner);
+        cvcCard.setValue(cvc);
         buttonCard.click();
     }
 
-    public void invalidPaymentGate() {
-        cardNumberCard.setValue(getDeclinedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
+    public void enterWithOutMonth(String cardNumber, String year, String owner, String cvc) {
+        cardNumberCard.setValue(cardNumber);
+        yearCard.setValue(year);
+        ownerCard.setValue(owner);
+        cvcCard.setValue(cvc);
         buttonCard.click();
     }
 
-    public void invalidNumberCard() {
-        cardNumberCard.setValue(getInvalidCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
+    public void enterWithOutYear(String cardNumber, String month, String owner, String cvc) {
+        cardNumberCard.setValue(cardNumber);
+        monthCard.setValue(month);
+        ownerCard.setValue(owner);
+        cvcCard.setValue(cvc);
         buttonCard.click();
     }
 
-    public void emptyMonth() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
+    public void enterWithOutOwner(String cardNumber, String month, String year, String cvc) {
+        cardNumberCard.setValue(cardNumber);
+        monthCard.setValue(month);
+        yearCard.setValue(year);
+        cvcCard.setValue(cvc);
         buttonCard.click();
     }
 
-    public void invalidMonth1() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getInvalidMonth1());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidMonth2() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getInvalidMonth2());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void emptyYear() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidYear() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getInvalidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidLastYear() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getInvalidLastYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidFutureYear() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getInvalidFutureYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void emptyOwner() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidOwnerCyrillic() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getInvalidOwnerCyrillic());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidOwnerMathSymbols() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getInvalidOwnerMathSymbols());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidOwnerOwnerRegister() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getInvalidOwnerRegister());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidOwnerOverLength() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getInvalidOwnerOverLength());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void invalidOwnerUnderLength() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getInvalidOwnerUnderLength());
-        cvcCard.setValue(getValidCvc());
-        buttonCard.click();
-    }
-
-    public void emptyCVC() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        buttonCard.click();
-    }
-
-    public void invalidCVC() {
-        cardNumberCard.setValue(getApprovedCardNumber());
-        monthCard.setValue(getValidMonth());
-        yearCard.setValue(getValidYear());
-        ownerCard.setValue(getValidOwner());
-        cvcCard.setValue(getInvalidCvc());
+    public void enterWithOutCvc(String cardNumber, String month, String year, String owner) {
+        cardNumberCard.setValue(cardNumber);
+        monthCard.setValue(month);
+        yearCard.setValue(year);
+        ownerCard.setValue(owner);
         buttonCard.click();
     }
 

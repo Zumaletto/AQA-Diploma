@@ -71,6 +71,10 @@ public class DataHelper {
         return month[rnd];
     }
 
+    public static String getNullMonth() {
+        return "00";
+    }
+
     public static String getValidYear() {
         return LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"));
     }
@@ -87,6 +91,10 @@ public class DataHelper {
         String[] year = {"1", "2", "3", "7"};
         int rnd = new Random().nextInt(year.length);
         return year[rnd];
+    }
+
+    public static String getNullYear() {
+        return "00";
     }
 
     public static String getValidOwner() {
@@ -131,5 +139,8 @@ public class DataHelper {
         return cvc;
     }
 
+    public static String getNullCvc() {
+        return "000";
+    }
 
 }

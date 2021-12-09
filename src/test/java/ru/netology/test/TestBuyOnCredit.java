@@ -45,281 +45,307 @@ public class TestBuyOnCredit {
     }
 
     @Test
-    @Order(1)
-    @DisplayName("")//"Переключение между вкладками кнопками Купить и Купить в кредит"
+ //"Переключение между вкладками кнопками Купить и Купить в кредит"
     void shouldCheckTransitionToCard() {
         var mainPage = new MainPage();
         mainPage.getPageByCard();
         var buyByCard = new BuyByCard();
         buyByCard.transitionToCredit();
-        $$(".heading").findBy(text("Кредит по данным карты")).shouldBe(visible);
         var buyOnCredit = new BuyOnCredit();
         buyOnCredit.transitionToCard();
-        $$(".heading").findBy(text("Оплата по карте")).shouldBe(visible);
     }
 
     @Test
-    @Order(2)
-    @DisplayName("")//"Успешная покупка тура картой со статусом APPROVED"
-    void shouldBuyOnCreditApproved() throws SQLException {
+//"Успешная покупка тура картой со статусом APPROVED"
+    void shouldBuyByCardApproved() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.validPaymentGate();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.getSuccessMessage();
-        assertEquals(approvedCard.getStatus(), creditData().getStatus());
-        assertEquals(creditData().getBank_id(), orderData().getPayment_id());
+        assertEquals(approvedCard.getStatus(), payData().getStatus());
+        assertEquals(payData().getTransaction_id(), orderData().getPayment_id());
     }
 
     @Test
-    @Order(3)
-    @DisplayName("")//"Покупка тура картой со статусом DECLINED"
-    void shouldBuyOnCreditDecline() throws SQLException {
+//"Покупка тура картой со статусом DECLINED"
+    void shouldBuyByCardDecline() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidPaymentGate();
+        buyOnCredit.enterCardData(
+                DataHelper.getDeclinedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.getFailMessage();
-        assertEquals(declinedCard.getStatus(), creditData().getStatus());
+        assertEquals(declinedCard.getStatus(), payData().getStatus());
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(4)
-    @DisplayName("")//"Покупка тура с невалидным номером карты"
-    void shouldBuyOnCreditInvalidCardNumber() throws SQLException {
+//"Покупка тура с невалидным номером карты"
+    void shouldBuyByInvalidCardNumber() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidNumberCard();
+        buyOnCredit.enterCardData(
+                DataHelper.getInvalidCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(5)
-    @DisplayName("")//"Отправка формы с пустым полем Номер карты"
-    void shouldBuyOnCreditEmptyCardNumber() throws SQLException {
+        //"Отправка формы с пустым полем Номер карты"
+    void shouldBuyByEmptyCardNumber() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.emptyNumberCard();
+        buyOnCredit.enterWithOutNumber(
+                DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(6)
-    @DisplayName("")//"Отправка формы с невалидным месяцем (однозначное числовое значение)"
-    void shouldBuyOnCreditInvalidMonth1() throws SQLException {
+//"Отправка формы с невалидным месяцем (однозначное числовое значение)"
+    void shouldBuyByInvalidMonth1() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidMonth1();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getInvalidMonth1(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(7)
-    @DisplayName("") //"Отправка формы с невалидным месяцем (неверно указан срок действия карты)
-    void shouldBuyOnCreditInvalidMonth2() throws SQLException {
+//"Отправка формы с невалидным месяцем (неверно указан срок действия карты)
+    void shouldBuyByInvalidMonth2() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidMonth2();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getInvalidMonth2(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.invalidError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(8)
-    @DisplayName("")//"Отправка формы с пустым полем Месяц"
-    void shouldBuyOnCreditEmptyMonth() throws SQLException {
+//"Отправка формы с пустым полем Месяц"
+    void shouldBuyByEmptyMonth() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.emptyMonth();
+        buyOnCredit.enterWithOutMonth(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(9)
-    @DisplayName("")//"Отправка формы с невалидным годом (однозначное числовое значение)"
-    void shouldBuyOnCreditInvalidYear() throws SQLException {
+//"Ввод нулевого значения в поле Месяц"
+    void shouldBuyByNullMonth() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidYear();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getNullMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(10)
-    @DisplayName("")//"Отправка формы с невалидным годом (неверно указан срок действия карты)"
-    void shouldBuyOnCreditInvalidLastYear() throws SQLException {
+//"Отправка формы с невалидным годом (однозначное числовое значение)"
+    void shouldBuyByInvalidYear() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidLastYear();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
+        buyOnCredit.formatError();
+        checkEmptyPaymentEntity();
+        checkEmptyOrderEntity();
+    }
+
+    @Test
+//"Отправка формы с невалидным годом (неверно указан срок действия карты)"
+    void shouldBuyByInvalidLastYear() throws SQLException {
+        var mainPage = new MainPage();
+        mainPage.getPageByCard();
+        var buyOnCredit = new BuyOnCredit();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidLastYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.expiredError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(11)
-    @DisplayName("")//"Отправка формы с невалидным годом (неверно указан срок действия карты)"
-    void shouldBuyOnCreditFutureYear() throws SQLException {
+//"Отправка формы с невалидным годом (неверно указан срок действия карты)"
+    void shouldBuyByFutureYear() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidFutureYear();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidFutureYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.invalidError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(12)
-    @DisplayName("")//"Отправка формы с пустым полем Год"
-    void shouldBuyOnCreditEmptyYear() throws SQLException {
+//"Отправка формы с пустым полем Год"
+    void shouldBuyByEmptyYear() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidFutureYear();
+        buyOnCredit.enterWithOutYear(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
         buyOnCredit.invalidError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(13)
-    @DisplayName("")//"Отправка формы с невалидным данными владельца (значение набрано кириллицей)"
-    void shouldBuyOnCreditInvalidOwner1() throws SQLException {
+//"Ввод нулевого значения в поле Год"
+    void shouldBuyByNullYear() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidOwnerCyrillic();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getNullYear(),
+                DataHelper.getValidOwner(), DataHelper.getValidCvc());
+        buyOnCredit.expiredError();
+        checkEmptyPaymentEntity();
+        checkEmptyOrderEntity();
+    }
+
+    @Test
+//"Отправка формы с невалидным данными владельца (значение набрано кириллицей)"
+    void shouldBuyByInvalidOwner1() throws SQLException {
+        var mainPage = new MainPage();
+        mainPage.getPageByCard();
+        var buyOnCredit = new BuyOnCredit();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getInvalidOwnerCyrillic(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(14)
-    @DisplayName("")//"Отправка формы с введеными в поле Владелец цифровых значений и математических символов"
-    void shouldBuyOnCreditInvalidOwner2() throws SQLException {
+//"Отправка формы с введеными в поле Владелец цифровых значений и математических символов"
+    void shouldBuyByInvalidOwner2() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidOwnerMathSymbols();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getInvalidOwnerMathSymbols(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(15)
-    @DisplayName("")//"Отправка формы с введеными в поле Владелец буквенных значений в нижнем и верхнем регистре"
-    void shouldBuyOnCreditInvalidOwner3() throws SQLException {
+//"Отправка формы с введеными в поле Владелец буквенных значений в нижнем и верхнем регистре"
+    void shouldBuyByInvalidOwner3() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidOwnerOwnerRegister();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getInvalidOwnerRegister(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(16)
-    @DisplayName("")//"Отправка формы с введеным в поле Владелец одного буквенного значения (минимальная длина поля)"
-    void shouldBuyOnCreditInvalidOwner4() throws SQLException {
+//"Отправка формы с введеным в поле Владелец одного буквенного значения (минимальная длина поля)"
+    void shouldBuyByInvalidOwner4() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidOwnerUnderLength();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getInvalidOwnerUnderLength(), DataHelper.getValidCvc());
         buyOnCredit.emptyError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(17)
-    @DisplayName("")//"Отправка формы с введеными в поле Владелец 270 буквенных значений (максимальная длина поля)"
-    void shouldBuyOnCreditInvalidOwner5() throws SQLException {
+//"Отправка формы с введеными в поле Владелец 270 буквенных значений (максимальная длина поля)"
+    void shouldBuyByInvalidOwner5() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidOwnerOverLength();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getInvalidOwnerOverLength(), DataHelper.getValidCvc());
         buyOnCredit.formatError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
     }
 
     @Test
-    @Order(18)
-    @DisplayName("")//"Отправка формы с пустым полем Владелец"
-    void shouldBuyOnCreditEmptyOwner() throws SQLException {
+//"Отправка формы с пустым полем Владелец"
+    void shouldBuyByEmptyOwner() throws SQLException {
         var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
+        mainPage.getPageByCard();
         var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.emptyOwner();
-        buyOnCredit.emptyOwner();
-        checkEmptyPaymentEntity();
-        checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
-    }
-
-    @Test
-    @Order(19)
-    @DisplayName("")//"Отправка формы с невалидным CVC/CCV (однозначное числовое значение"
-    void shouldBuyOnCreditInvalidCvc() throws SQLException {
-        var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
-        var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.invalidCVC();
-        buyOnCredit.formatError();
-        checkEmptyPaymentEntity();
-        checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
-    }
-
-    @Test
-    @Order(20)
-    @DisplayName("")//"Отправка формы с невалидным CVC/CCV (однозначное числовое значение"
-    void shouldBuyOnCreditEmptyCvc() throws SQLException {
-        var mainPage = new MainPage();
-        mainPage.getPageOnCredit();
-        var buyOnCredit = new BuyOnCredit();
-        buyOnCredit.emptyCVC();
+        buyOnCredit.enterWithOutOwner(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
+                DataHelper.getValidYear(),DataHelper.getValidCvc());
         buyOnCredit.emptyError();
         checkEmptyPaymentEntity();
         checkEmptyOrderEntity();
-        checkEmptyCreditEntity();
+    }
+
+    @Test
+//"Отправка формы с невалидным CVC/CCV (однозначное числовое значение)"
+    void shouldBuyByInvalidCvc() throws SQLException {
+        var mainPage = new MainPage();
+        mainPage.getPageByCard();
+        var buyOnCredit = new BuyOnCredit();
+        buyOnCredit.enterCardData(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
+                DataHelper.getValidOwner(), DataHelper.getInvalidCvc());
+        buyOnCredit.formatError();
+        checkEmptyPaymentEntity();
+        checkEmptyOrderEntity();
+    }
+
+    @Test
+//"Отправка пустой формы CVC"
+    void shouldBuyByEmptyCvc() throws SQLException {
+        var mainPage = new MainPage();
+        mainPage.getPageByCard();
+        var buyOnCredit = new BuyOnCredit();
+        buyOnCredit.enterWithOutCvc(
+                DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
+                DataHelper.getValidYear(), DataHelper.getValidOwner());
+        buyOnCredit.formatError();
+        checkEmptyPaymentEntity();
+        checkEmptyOrderEntity();
     }
 }
