@@ -44,20 +44,20 @@ public class TestBuyByCard {
     @Test
 //"Переключение между вкладками кнопками Купить и Купить в кредит"
     void shouldCheckTransitionToCard() {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageOnCredit();
-        var buyOnCredit = new BuyOnCredit();
+        BuyOnCredit buyOnCredit = new BuyOnCredit();
         buyOnCredit.transitionToCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.transitionToCredit();
     }
 
     @Test
 //"Успешная покупка тура картой со статусом APPROVED"
     void shouldBuyByCardApproved() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -69,9 +69,9 @@ public class TestBuyByCard {
     @Test
 //"Покупка тура картой со статусом DECLINED"
     void shouldBuyByCardDecline() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getDeclinedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -83,9 +83,9 @@ public class TestBuyByCard {
     @Test
 //"Покупка тура с невалидным номером карты"
     void shouldBuyByInvalidCardNumber() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getInvalidCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -97,9 +97,9 @@ public class TestBuyByCard {
     @Test
         //"Отправка формы с пустым полем Номер карты"
     void shouldBuyByEmptyCardNumber() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterWithOutNumber(
                 DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -111,9 +111,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным месяцем (однозначное числовое значение)"
     void shouldBuyByInvalidMonth1() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getInvalidMonth1(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -125,9 +125,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным месяцем (неверно указан срок действия карты)
     void shouldBuyByInvalidMonth2() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getInvalidMonth2(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -139,9 +139,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с пустым полем Месяц"
     void shouldBuyByEmptyMonth() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterWithOutMonth(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -153,9 +153,9 @@ public class TestBuyByCard {
     @Test
 //"Ввод нулевого значения в поле Месяц"
     void shouldBuyByNullMonth() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getNullMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -167,9 +167,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным годом (однозначное числовое значение)"
     void shouldBuyByInvalidYear() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -181,9 +181,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным годом (неверно указан срок действия карты)"
     void shouldBuyByInvalidLastYear() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidLastYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -195,9 +195,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным годом (неверно указан срок действия карты)"
     void shouldBuyByFutureYear() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getInvalidFutureYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -209,9 +209,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с пустым полем Год"
     void shouldBuyByEmptyYear() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterWithOutYear(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -223,9 +223,9 @@ public class TestBuyByCard {
     @Test
 //"Ввод нулевого значения в поле Год"
     void shouldBuyByNullYear() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getNullYear(),
                 DataHelper.getValidOwner(), DataHelper.getValidCvc());
@@ -237,9 +237,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным данными владельца (значение набрано кириллицей)"
     void shouldBuyByInvalidOwner1() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getInvalidOwnerCyrillic(), DataHelper.getValidCvc());
@@ -251,9 +251,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с введеными в поле Владелец цифровых значений и математических символов"
     void shouldBuyByInvalidOwner2() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getInvalidOwnerMathSymbols(), DataHelper.getValidCvc());
@@ -265,9 +265,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с введеными в поле Владелец буквенных значений в нижнем и верхнем регистре"
     void shouldBuyByInvalidOwner3() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getInvalidOwnerRegister(), DataHelper.getValidCvc());
@@ -279,9 +279,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с введеным в поле Владелец одного буквенного значения (минимальная длина поля)"
     void shouldBuyByInvalidOwner4() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getInvalidOwnerUnderLength(), DataHelper.getValidCvc());
@@ -293,9 +293,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с введеными в поле Владелец 270 буквенных значений (максимальная длина поля)"
     void shouldBuyByInvalidOwner5() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getInvalidOwnerOverLength(), DataHelper.getValidCvc());
@@ -307,9 +307,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с пустым полем Владелец"
     void shouldBuyByEmptyOwner() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterWithOutOwner(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
                 DataHelper.getValidYear(),DataHelper.getValidCvc());
@@ -321,9 +321,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка формы с невалидным CVC/CCV (однозначное числовое значение)"
     void shouldBuyByInvalidCvc() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterCardData(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(), DataHelper.getValidYear(),
                 DataHelper.getValidOwner(), DataHelper.getInvalidCvc());
@@ -335,9 +335,9 @@ public class TestBuyByCard {
     @Test
 //"Отправка пустой формы CVC"
     void shouldBuyByEmptyCvc() throws SQLException {
-        var mainPage = new MainPage();
+        MainPage mainPage = new MainPage();
         mainPage.getPageByCard();
-        var buyByCard = new BuyByCard();
+        BuyByCard buyByCard = new BuyByCard();
         buyByCard.enterWithOutCvc(
                 DataHelper.getApprovedCardNumber(), DataHelper.getValidMonth(),
                 DataHelper.getValidYear(), DataHelper.getValidOwner());
