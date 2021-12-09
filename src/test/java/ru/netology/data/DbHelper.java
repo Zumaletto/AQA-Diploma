@@ -13,7 +13,7 @@ import java.sql.DriverManager;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class DbHelper {
-    private static String url = "jdbc:mysql://185.119.57.164:3306/app"; //jdbc:postgresql://185.119.57.164:5432/app
+    private static String url = System.getProperty("datasource.url");
     private static String user = "app";
     private static String password = "pass";
 

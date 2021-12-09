@@ -22,10 +22,11 @@ ___
     - с использованием БД PostgreSQL командой ```java "-Dspring.datasource.url=jdbc:postgresql://185.119.57.164:5432/app" -jar artifacts/aqa-shop.jar```
 * запустить автотесты командой:
   - для конфигурации БД MySql:  
-    ```gradlew clean test -Ddb.url=jdbc:mysql://185.119.57.164:3306/app ```
+    ```./gradlew clean test "-Ddatasource.url=jdbc:mysql://185.119.57.164:3306/app" ```
   - для конфигурации БД PostgreSQL:  
-    ```gradlew clean test -Ddb.url=jdbc:postgresql://185.119.57.164:5432/app ```
-* запустить отчеты командой:
+    ```./gradlew clean test "-Ddatasource.url=jdbc:postgresql://185.119.57.164:5432/app" ```
+* запустить отчеты командой: 
+
 ```./gradlew allureReport (первоначальная команда)```
 
 ```./gradlew allureServe (запуск и открытие отчетов)```
