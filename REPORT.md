@@ -19,10 +19,12 @@ ___
 - Неуспешных: 18 тест-кейсов - 40,91%
 
 Отчет о тестировании [Allure](http://192.168.0.26:54719/index.html):
-![](https://disk.yandex.ru/i/MtznOYYSQzs6Mg)
+![Desktop 2021-12-10 11-45-05](https://user-images.githubusercontent.com/87120177/145561474-065e84d6-a774-477a-8bcd-dedb8ae47c61.png)
+
 
 Отчет о тестировании [Gradle](file:///C:/Users/GIT/IdeaProjects/AQA-Diploma/build/reports/tests/test/index.html):
-![](https://disk.yandex.ru/i/S4h8KCsXmoGmHA) 
+![Desktop 2021-12-10 12-20-15](https://user-images.githubusercontent.com/87120177/145561513-8102b401-7219-40b3-9e51-cf03eb5701aa.png)
+
 
 На все выявленные ошибки были заведены репорты в [Issues](https://github.com/Zumaletto/AQA-Diploma/issues)
 
