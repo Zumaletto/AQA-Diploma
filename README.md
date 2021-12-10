@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/6o2hn25sc9lfxfgq?svg=true)](https://ci.appveyor.com/project/Zumaletto/aqa-diploma)
+
 ## Дипломный проект профессии "Тестировщик"
 ___
 
