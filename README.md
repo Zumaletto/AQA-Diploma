@@ -3,7 +3,7 @@ ___
 
 ### Документация по проекту
 1. [План тестирования](https://github.com/Zumaletto/AQA-Diploma/blob/master/Plan.md) 
-2. Отчет по итогам автоматизированного тестирования
+2. [Отчет по итогам автоматизированного тестирования](https://github.com/Zumaletto/AQA-Diploma/blob/master/REPORT.md)
 3. Отчет по итогам автоматизации
 
 ### Запуск приложения

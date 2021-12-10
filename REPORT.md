@@ -22,7 +22,7 @@ ___
 ![](https://disk.yandex.ru/i/MtznOYYSQzs6Mg)
 
 Отчет о тестировании [Gradle](file:///C:/Users/GIT/IdeaProjects/AQA-Diploma/build/reports/tests/test/index.html):
-![](https://disk.yandex.ru/i/S4h8KCsXmoGmHA)
+![](https://disk.yandex.ru/i/S4h8KCsXmoGmHA) 
 
 На все выявленные ошибки были заведены репорты в [Issues](https://github.com/Zumaletto/AQA-Diploma/issues)
 
