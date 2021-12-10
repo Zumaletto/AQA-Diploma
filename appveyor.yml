@@ -9,7 +9,17 @@ branches:
 build: off
 
 install:
+  # запускаем docker-compose
+  - ps
+  - docker-compose up -d
+  - sleep 15
+  - docker ps
+  - sleep 15
+  # запускаем SUT
+  - java "-Dspring.datasource.url=jdbc:mysql://185.119.57.164:3306/app" -jar artifacts/aqa-shop.jar
+  # +x добавить права на (execute) выполнение файла (chmod (от англ. change mode) — команда для изменения прав доступа к файлам и каталогам, используемая в Unix-подобных операционных системах)
+  - chmod +x gradlew
 
 build_script:
-  - ./gradlew test --info -Dselenide.headless=true
-  - docker ps
+  # запускаем тест
+  - ./gradlew clean test "-Ddatasource.url=jdbc:postgresql://185.119.57.164:5432/app" -Dselenide.headless=true
