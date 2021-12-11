@@ -2,6 +2,7 @@ package ru.netology.page;
 
 import com.codeborne.selenide.ElementsCollection;
 import com.codeborne.selenide.SelenideElement;
+import org.openqa.selenium.By;
 
 import java.time.Duration;
 
@@ -15,7 +16,7 @@ public class BuyOnCredit {
     private SelenideElement cardNumberCard = $(".input__control[placeholder='0000 0000 0000 0000']");
     private SelenideElement monthCard = $(".input__control[placeholder='08']");
     private SelenideElement yearCard = $(".input__control[placeholder='22']");
-    private SelenideElement ownerCard = $("div:nth-child(3) > span > span:nth-child(1) > span > span > span.input__box > input");
+    private SelenideElement ownerCard = $(By.xpath("//span[text()='Владелец']/..//input"));
     private SelenideElement cvcCard = $(".input [placeholder='999']");
 
     private SelenideElement buttonBuyCard = $$("button").findBy(text("Купить"));
@@ -41,46 +42,6 @@ public class BuyOnCredit {
         yearCard.setValue(year);
         ownerCard.setValue(owner);
         cvcCard.setValue(cvc);
-        buttonCard.click();
-    }
-
-    public void enterWithOutNumber(String month, String year, String owner, String cvc) {
-        monthCard.setValue(month);
-        yearCard.setValue(year);
-        ownerCard.setValue(owner);
-        cvcCard.setValue(cvc);
-        buttonCard.click();
-    }
-
-    public void enterWithOutMonth(String cardNumber, String year, String owner, String cvc) {
-        cardNumberCard.setValue(cardNumber);
-        yearCard.setValue(year);
-        ownerCard.setValue(owner);
-        cvcCard.setValue(cvc);
-        buttonCard.click();
-    }
-
-    public void enterWithOutYear(String cardNumber, String month, String owner, String cvc) {
-        cardNumberCard.setValue(cardNumber);
-        monthCard.setValue(month);
-        ownerCard.setValue(owner);
-        cvcCard.setValue(cvc);
-        buttonCard.click();
-    }
-
-    public void enterWithOutOwner(String cardNumber, String month, String year, String cvc) {
-        cardNumberCard.setValue(cardNumber);
-        monthCard.setValue(month);
-        yearCard.setValue(year);
-        cvcCard.setValue(cvc);
-        buttonCard.click();
-    }
-
-    public void enterWithOutCvc(String cardNumber, String month, String year, String owner) {
-        cardNumberCard.setValue(cardNumber);
-        monthCard.setValue(month);
-        yearCard.setValue(year);
-        ownerCard.setValue(owner);
         buttonCard.click();
     }
 

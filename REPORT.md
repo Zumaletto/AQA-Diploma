@@ -14,16 +14,13 @@ ___
 
 ### Количество тест-кейсов
 
-**Всего:** 44 тест - кейса (4 позитивных, 40 негативных)
-- Успешных: 26 тест-кейсов - 59,09% 
-- Неуспешных: 18 тест-кейсов - 40,91%
+**Всего:** 46 тест - кейса (4 позитивных, 42 негативных)
+- Успешных: 25 тест-кейсов - 54, 34% 
+- Неуспешных: 21 тест-кейсов - 45, 66%
 
-Отчет о тестировании [Allure](http://192.168.0.26:54719/index.html):
-![Desktop 2021-12-10 11-45-05](https://user-images.githubusercontent.com/87120177/145561474-065e84d6-a774-477a-8bcd-dedb8ae47c61.png)
+Отчет о тестировании [Allure](http://192.168.0.26:62263/index.html):
 
-
-Отчет о тестировании [Gradle](file:///C:/Users/GIT/IdeaProjects/AQA-Diploma/build/reports/tests/test/index.html):
-![Desktop 2021-12-10 12-20-15](https://user-images.githubusercontent.com/87120177/145561513-8102b401-7219-40b3-9e51-cf03eb5701aa.png)
+Отчет о тестировании Gradle:
 
 
 На все выявленные ошибки были заведены репорты в [Issues](https://github.com/Zumaletto/AQA-Diploma/issues)

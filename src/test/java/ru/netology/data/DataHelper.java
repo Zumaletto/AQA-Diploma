@@ -49,6 +49,8 @@ public class DataHelper {
         return Long.toString(faker.number().randomNumber(7, true));
     }
 
+    public static String getEmptyCardNumber(){return  " ";}
+
     public static String getValidMonth() {
         String[] month = {"01", "02", "03", "04",
                 "05", "06", "07", "08",
@@ -75,6 +77,8 @@ public class DataHelper {
         return "00";
     }
 
+    public static String getEmptyMonth(){return  " ";}
+
     public static String getValidYear() {
         return LocalDate.now().plusYears(2).format(DateTimeFormatter.ofPattern("yy"));
     }
@@ -96,6 +100,8 @@ public class DataHelper {
     public static String getNullYear() {
         return "00";
     }
+
+    public static String getEmptyYear(){return  " ";}
 
     public static String getValidOwner() {
         Faker faker = new Faker(new Locale("en"));
@@ -127,6 +133,8 @@ public class DataHelper {
         return "P";
     }
 
+    public static String getEmptyOwner(){return  " ";}
+
     public static String getValidCvc() {
         Faker faker = new Faker();
         String cvc = faker.numerify("###");
@@ -142,5 +150,7 @@ public class DataHelper {
     public static String getNullCvc() {
         return "000";
     }
+
+    public static String getEmptyCvc(){return  " ";}
 
 }
