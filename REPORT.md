@@ -20,8 +20,11 @@ ___
 
 Отчет о тестировании [Allure](http://192.168.0.26:62263/index.html):
 
+![Desktop 2021-12-11 20-37-28](https://user-images.githubusercontent.com/87120177/145686609-4eba65a7-cb4a-4a8b-ad46-db06b38af771.png)
+
 Отчет о тестировании Gradle:
 
+![Desktop 2021-12-11 20-33-27](https://user-images.githubusercontent.com/87120177/145686618-af943217-370d-4310-9d4e-7165112dd2c7.png)
 
 На все выявленные ошибки были заведены репорты в [Issues](https://github.com/Zumaletto/AQA-Diploma/issues)
 
